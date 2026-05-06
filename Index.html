@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>SUKIMAN GLOBAL ACCESS</title>
+
+<style>
+body {
+  margin: 0;
+  background: black;
+  color: #00ff00;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+/* GRID */
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 50px 1fr 150px;
+  height: 100vh;
+  gap: 5px;
+  padding: 5px;
+}
+
+.box {
+  border: 1px solid #00ff00;
+  padding: 10px;
+  overflow: hidden;
+}
+
+/* HEADER */
+.header {
+  grid-column: 1 / 4;
+  text-align: center;
+}
+
+/* PANELS */
+.left { grid-column: 1; }
+.center { grid-column: 2; }
+.right { grid-column: 3; }
+.bottom { grid-column: 1 / 4; }
+
+/* RAINBOW */
+.rainbow {
+  background: linear-gradient(90deg, red, orange, yellow, lime, cyan, blue, violet);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowMove 2s linear infinite;
+}
+
+@keyframes rainbowMove {
+  0% { background-position: 0%; }
+  100% { background-position: 300%; }
+}
+
+/* TERMINAL */
+#terminal {
+  white-space: pre-line;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* PROGRESS */
+#progressContainer {
+  border: 1px solid #00ff00;
+  height: 20px;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: #00ff00;
+}
+
+/* PHONE LIST */
+.phone {
+  font-size: 13px;
+}
+
+.hacked {
+  color: red;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="box header rainbow">SUKIMAN GLOBAL SYSTEM</div>
+
+  <!-- LEFT: PHONE LIST -->
+  <div class="box left" id="phones"></div>
+
+  <!-- CENTER -->
+  <div class="box center">
+    <div id="terminal"></div>
+
+    <div id="progressContainer">
+      <div id="progressBar"></div>
+    </div>
+
+    <div class="rainbow" style="text-align:center; margin-top:10px;">
+      Dev by SUKIMAN
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="box right" id="log"></div>
+
+  <!-- BOTTOM -->
+  <div class="box bottom" id="bottom"></div>
+
+</div>
+
+<script>
+// ==== TERMINAL ====
+const lines = [
+"> scanning global devices...",
+"> detecting mobile systems...",
+"> injecting SUKIMAN access...",
+"> overriding control...",
+"> ACCESS: GLOBAL SUKIMAN"
+];
+
+let i = 0;
+const terminal = document.getElementById("terminal");
+
+function typeLine() {
+  if (i < lines.length) {
+    terminal.innerHTML += lines[i] + "\n";
+    terminal.scrollTop = terminal.scrollHeight;
+    i++;
+    setTimeout(typeLine, 700);
+  }
+}
+typeLine();
+
+// ==== PROGRESS ====
+let progress = 0;
+function loadBar() {
+  const bar = document.getElementById("progressBar");
+
+  if (progress < 100) {
+    progress += Math.random() * 3;
+    bar.style.width = progress + "%";
+    setTimeout(loadBar, 200);
+  }
+}
+loadBar();
+
+// ==== LIST HP ====
+const brands = [
+"Samsung","Xiaomi","Oppo","Vivo","Realme",
+"iPhone","Huawei","Infinix","Tecno","Nokia",
+"Sony","Asus","Lenovo","Motorola","Google Pixel"
+];
+
+function addPhone() {
+  const p = document.getElementById("phones");
+  const line = document.createElement("div");
+  line.className = "phone";
+
+  const brand = brands[Math.floor(Math.random() * brands.length)];
+
+  line.innerHTML = brand + " → <span class='hacked'>CONTROLLED BY SUKIMAN</span>";
+
+  p.appendChild(line);
+
+  if (p.children.length > 50) {
+    p.removeChild(p.firstChild);
+  }
+}
+setInterval(addPhone, 200);
+
+// ==== LOG ====
+function addLog() {
+  const log = document.getElementById("log");
+  const line = document.createElement("div");
+  line.innerText = "[OK] DEVICE LINKED: SUKIMAN";
+
+  log.appendChild(line);
+
+  if (log.children.length > 50) {
+    log.removeChild(log.firstChild);
+  }
+}
+setInterval(addLog, 150);
+
+// ==== BOTTOM ====
+function bottomSpam() {
+  const b = document.getElementById("bottom");
+  const line = document.createElement("div");
+  line.className = "rainbow";
+  line.innerText = "SUKIMAN ACCESS SUKIMAN ACCESS";
+
+  b.appendChild(line);
+
+  if (b.children.length > 30) {
+    b.removeChild(b.firstChild);
+  }
+}
+setInterval(bottomSpam, 120);
+
+// FULLSCREEN
+document.body.addEventListener("click", () => {
+  document.documentElement.requestFullscreen();
+});
+</script>
+
+</body>
+</html>
